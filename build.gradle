@@ -1,0 +1,32 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        jcenter()
+        google()
+        flatDir {
+            dirs 'src/main/aarLibs'
+        }
+    }
+    apply from: file('config.gradle').exists() ? 'config.gradle' : 'config-stable.gradle'
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.2'
+    }
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        jcenter()
+        google()
+        flatDir {
+            dirs 'src/main/aarLibs'
+            dirs '../alivc-player-lib'
+        }
+    }
+}
+
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
